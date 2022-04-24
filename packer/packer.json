@@ -37,6 +37,7 @@
         "SSH_USERNAME={{user `ssh_username`}}"
       ],
       "inline": [
+        "ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts",
         "git clone git@github.com:gmarmstrong/remote-dev.git",
         "(cd ./remote-dev/bootstrap; ./bootstrap.sh)"
       ]
