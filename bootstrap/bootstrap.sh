@@ -93,11 +93,11 @@ security-hardening() {
     sudo sh -c "iptables-save > /etc/iptables/rules.v6"
 }
 
-pip-installs() {
-    echo " ==> Installing Python modules"
-    pip install -U jedi-language-server pre-commit pynvim
-    pip install pre-commit
-}
+#pip-installs() {
+#    echo " ==> Installing Python modules"
+#    pip install -U jedi-language-server pre-commit pynvim
+#    pip install pre-commit
+#}
 
 #go-installs() {
 #    GO_ARCHIVE="go${GO_VERSION}.linux-amd64.tar.gz"
