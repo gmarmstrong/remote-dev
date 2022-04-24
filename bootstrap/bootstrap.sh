@@ -46,7 +46,6 @@ apt-installs() {
         ripgrep \
         sshguard \
         tailscale \
-        terraform-ls \
         tmux \
         universal-ctags \
         unzip \
