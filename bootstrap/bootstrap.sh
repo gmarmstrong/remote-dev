@@ -177,13 +177,13 @@ do-it() {
     security-hardening
 
     # Python modules installs.
-    pip-installs
+    #pip-installs
 
     # Golang installs.
-    go-installs
+    #go-installs
 
     # Javascript installs.
-    js-installs
+    #js-installs
 
     # Dotfiles.
     copy-dotfiles
