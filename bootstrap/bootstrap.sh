@@ -70,19 +70,6 @@ additional-installs() {
     fi
 }
 
-security-hardening() {
-    echo " ==> Setting up sshd"
-    sudo cp config/ssh/sshd_config /etc/ssh/sshd_config
-    sudo sed -i "s/SSH_USERNAME/${SSH_USERNAME}/g" /etc/ssh/sshd_config
-
-    echo " ==> Setting up sshguard"
-    sudo iptables -A INPUT -m multiport -p tcp --destination-ports 22 -j sshguard
-    sudo iptables -A INPUT -m multiport -p udp --destination-ports 60000:61000 -j sshguard
-    sudo mkdir -p /etc/iptables
-    sudo sh -c "iptables-save > /etc/iptables/rules.v4"
-    sudo sh -c "iptables-save > /etc/iptables/rules.v6"
-}
-
 #pip-installs() {
 #    echo " ==> Installing Python modules"
 #    pip install -U jedi-language-server pre-commit pynvim
@@ -162,9 +149,6 @@ do-it() {
 
     # Additional installs.
     additional-installs
-
-    # Security hardening.
-    security-hardening
 
     # Python modules installs.
     #pip-installs
