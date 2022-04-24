@@ -111,7 +111,7 @@ pip-installs() {
 #    fi
 #}
 
-js-installs() {
+#js-installs() {
     #if [ ! -f "/usr/bin/node" ]; then
     #    echo " ==> Installing Node.js"
     #    curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo bash -
@@ -127,7 +127,7 @@ js-installs() {
 
     #echo " ==> Installing global node modules"
     #yarn global add ansible-language-server bash-language-server dockerfile-language-server-nodejs graphql-language-service-cli @tailwindcss/language-server typescript typescript-language-server vim-language-server vscode-langservers-extracted yaml-language-server
-}
+#}
 
 copy-dotfiles() {
     echo " ==> Copying dotfiles"
