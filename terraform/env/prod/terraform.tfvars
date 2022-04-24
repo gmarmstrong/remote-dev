@@ -1,6 +1,6 @@
-machine_type = "e2-micro"
+machine_type = "e2-medium"
 
-ssh_user    = "2n3g5c9"
-ssh_pub_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICJc/+eyCOPGY+gC937rNmpjYN6NNInutlNXWeYtt5Vr 2n3g5c9"
+ssh_user    = "guthrie"
+ssh_pub_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMWH7ALlB4hmr0eb3A1tEQjoDvf6HbMKl588+H/IV4yE guthrie.armstrong@gmail.com"
 
-tailscale_machines = ["100.64.87.60", "100.119.123.80", "100.120.203.66"]
+tailscale_machines = ["100.75.200.33"]
