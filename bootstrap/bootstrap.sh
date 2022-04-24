@@ -145,12 +145,12 @@ copy-dotfiles() {
     cp -r config/nvim/* "${HOME}/.config/nvim/"
 }
 
-change-shell() {
+#change-shell() {
     #echo " ==> Changing the shell to Fish"
     #if [ -f "/usr/bin/fish" ]; then
     #    sudo chsh -s /usr/bin/fish "${USER}"
     #fi
-}
+#}
 
 vim-plugins-installs() {
     LOCAL_BIN="${HOME}/.local/bin"
