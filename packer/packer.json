@@ -5,7 +5,7 @@
     "gce_source_image_project_id": "ubuntu-os-cloud",
     "gce_source_image_family": "ubuntu-2004-lts",
     "name": "remote-dev",
-    "ssh_username": "guthrie_armstrong"
+    "ssh_username": "guthrie"
   },
   "builders": [
     {
@@ -37,7 +37,7 @@
         "SSH_USERNAME={{user `ssh_username`}}"
       ],
       "inline": [
-        "git clone https://github.com/gmarmstrong/remote-dev.git",
+        "git clone git@github.com:gmarmstrong/remote-dev.git",
         "(cd ./remote-dev/bootstrap; ./bootstrap.sh)"
       ]
     }
