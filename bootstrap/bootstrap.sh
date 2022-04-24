@@ -30,20 +30,11 @@ apt-installs() {
     echo " ==> Installing base packages"
     sudo apt-get update
     sudo apt-get install -y \
-        fish \
-        fzf \
         git \
-        htop \
-        iftop \
-        iptables-persistent \
-        jq \
         mosh \
         neovim \
-        prettyping \
         python3 \
         python3-pip \
-        ranger \
-        ripgrep \
         sshguard \
         tailscale \
         tmux \
