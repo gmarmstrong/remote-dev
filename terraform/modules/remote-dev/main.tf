@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------------------------------------------------
-# DEPLOY A DEVELOPMENT INSTANCE ACCESSIBLE VIA SSH AND MOSH IN A TAILSCALE NETWORK
+# DEPLOY A DEVELOPMENT INSTANCE ACCESSIBLE VIA SSH AND MOSH
 # ---------------------------------------------------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------------------------------------------------
@@ -48,13 +48,6 @@ resource "google_compute_instance" "this" {
     block-project-ssh-keys = true
   }
 
-  metadata_startup_script = templatefile("${path.module}/startup_script.tpl",
-    {
-      tailscale_key      = var.tailscale_key
-      tailscale_machines = var.tailscale_machines
-    }
-  )
-
   service_account {
     email  = data.google_compute_default_service_account.default.email
     scopes = ["logging-write", "monitoring-write"]
@@ -76,7 +69,6 @@ resource "google_compute_firewall" "ingress" {
   network = "default"
 
   direction     = "INGRESS"
-  source_ranges = var.tailscale_machines
   target_tags   = ["remote-dev"]
 
   allow {

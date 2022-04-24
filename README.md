@@ -49,8 +49,7 @@ This repository helps automate the provisioning of an ephemeral development serv
 [Google Cloud Platform](https://cloud.google.com/). An immutable image is built with [Packer](https://packer.io/) and
 deployed on an `e2-micro` [Compute Engine](https://cloud.google.com/compute) instance (in `us-east1-b` to fall in the
 free tier) with [Terraform](https://www.terraform.io/), all via [Cloud Build](https://cloud.google.com/cloud-build).
-The instance is only accessible via SSH and MOSH in your [Tailscale](https://tailscale.com/) network. Keep in mind
-you'll be charged for the External IP address.
+Keep in mind you'll be charged for the External IP address.
 
 ### Generate your SSH key pair
 
@@ -108,34 +107,13 @@ In the `remote-dev` repository, submit the following **Cloud Build** job:
 
 ## 🚀 How to deploy the server
 
-In `remote-dev/terraform/env/prod/terraform.tfvars`, replace the SSH user/public key and Tailscale machines IP addresses
-with your own values.
-
-Generate a [Tailscale ephemeral key](https://login.tailscale.com/admin/settings/authkeys) and set it:
-
-```bash
-export TAILSCALE_KEY="tskey-xxx"
-```
+In `remote-dev/terraform/env/prod/terraform.tfvars`, replace the SSH user/public key with your own values.
 
 Then in the `remote-dev` repository, submit the following **Cloud Build** jobs:
 
 ```bash
 (cd terraform/states; gcloud builds submit)
-(cd terraform; gcloud builds submit --substitutions=_TAILSCALE_KEY="${TAILSCALE_KEY}")
-```
-
-Once deployed, you can set explicit [Tailscale ACLs](https://login.tailscale.com/admin/acls) like the following to
-restrict network access in your mesh:
-
-```json
-{
-  "Hosts": {
-    "remote-dev": "INSERT_IP_ADDRESS_HERE"
-  },
-  "ACLs": [
-    { "Action": "accept", "Users": ["INSERT_USERNAME_HERE"], "Ports": ["remote-dev:22,60000-61000"] }
-  ]
-}
+(cd terraform; gcloud builds submit)
 ```
 
 ## 🧨 How to destroy the server
@@ -152,7 +130,6 @@ In the `remote-dev` repository, submit the following **Cloud Build** jobs:
 - [Google Cloud Build](https://cloud.google.com/cloud-build): A tool to "Continuously build, test, and deploy".
 - [Packer](https://www.packer.io/): A tool to "Build Automated Machine Images".
 - [Terraform](https://www.terraform.io/): A tool to "Write, Plan, and Create Infrastructure as Code".
-- [Tailscale](https://tailscale.com/): A zero config WireGuard mesh VPN.
 
 ## 📃 License
 
