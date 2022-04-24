@@ -55,29 +55,6 @@ apt-installs() {
 }
 
 additional-installs() {
-    #echo " ==> Installing fisher"
-    #curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-
-    #if [ ! -f "/usr/local/bin/starship" ]; then
-    #    echo " ==> Installing Starship"
-    #    curl -fsSL https://starship.rs/install.sh | bash -s -- -f
-    #fi
-
-    #if [ ! -f "/usr/bin/delta" ]; then
-    #    echo " ==> Installing git-delta"
-    #    curl -sLO "https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/git-delta_${DELTA_VERSION}_amd64.deb"
-    #    sudo dpkg -i ./git-delta_${DELTA_VERSION}_amd64.deb
-    #    rm ./git-delta_${DELTA_VERSION}_amd64.deb
-    #fi
-
-    #LOCAL_BIN="${HOME}/.local/bin"
-    #mkdir -p "${LOCAL_BIN}"
-    #if [ ! -f "${LOCAL_BIN}/nvim.appimage" ]; then
-    #    echo " ==> Installing nvim"
-    #    curl -fLo "${LOCAL_BIN}/nvim.appimage" https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim.appimage
-    #    chmod u+x "${LOCAL_BIN}/nvim.appimage"
-    #fi
-
     VIM_PLUG="${HOME}/.config/nvim/autoload/plug.vim"
     if [ ! -f "${VIM_PLUG}" ]; then
         echo " ==> Installing vim-plug"
