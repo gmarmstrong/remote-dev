@@ -189,7 +189,7 @@ do-it() {
     copy-dotfiles
 
     # Shell
-    change-shell
+    #change-shell
 
     # Vim plugins installs.
     vim-plugins-installs
