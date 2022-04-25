@@ -13,31 +13,43 @@ export TERRAFORM_VERSION_SHA256SUM="9d2d8a89f5cc8bc1c06cb6f34ce76ec4b99184b07eb7
 # Set project id
 gcloud config set project $PROJECT_ID
 
-git submodule update --init
+set_permissions() {
+    ./set_acls.sh "$PROJECT_ID"
+}
 
-just_update() {
-    # build the packer image
+builders_build() {
+    # set up Cloud Build
+    git submodule update --init
+    (cd cloud-builders-community/packer; gcloud builds submit)
+    (cd cloud-builders-community/terraform; gcloud builds submit \
+        --substitutions=_TERRAFORM_VERSION="$TERRAFORM_VERSION",_TERRAFORM_VERSION_SHA256SUM="$TERRAFORM_VERSION_SHA256SUM")
+}
+
+packer_build() {
     (cd packer; gcloud builds submit)
-    # deploy the server
+}
+
+tf_build() {
     (cd terraform/states; gcloud builds submit)
     (cd terraform; gcloud builds submit)
 }
 
-if [ "$1" == "create" ] # launch the system
-then
-    # set up permissions
-    ./set_acls.sh $PROJECT_ID
-    # set up Cloud Build
-    (cd cloud-builders-community/packer; gcloud builds submit)
-    (cd cloud-builders-community/terraform; gcloud builds submit --substitutions=_TERRAFORM_VERSION="$TERRAFORM_VERSION",_TERRAFORM_VERSION_SHA256SUM="$TERRAFORM_VERSION_SHA256SUM")
-    rm -rf gcloud
-    # build the packer image and deploy
-    just_update
-elif [ "$1" == "quick" ] # launch the system, skipping some steps
-then
-    just_update
-elif [ "$1" == "destroy" ] # shut down the system
-then
+destroy() {
     (cd terraform; gcloud builds submit --config=cloudbuild-destroy.yaml)
     (cd terraform/states; gcloud builds submit --config=cloudbuild-destroy.yaml)
+}
+
+if [ "$1" == "create" ] # launch the system
+then
+    set_permissions
+    builders_build
+    packer_build
+    tf_build
+elif [ "$1" == "quick" ] # launch the system, skipping some steps
+then
+    packer_build
+    tf_build
+elif [ "$1" == "destroy" ] # shut down the system
+then
+    destroy
 fi
