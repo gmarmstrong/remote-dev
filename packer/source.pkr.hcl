@@ -6,6 +6,7 @@ source "googlecompute" "ubuntu" {
   network                 = "default"
   project_id              = "${var.gcp_project_id}"
   scopes                  = [
+    "https://www.googleapis.com/auth/cloud-platform",
     "https://www.googleapis.com/auth/userinfo.email",
     "https://www.googleapis.com/auth/compute",
     "https://www.googleapis.com/auth/devstorage.full_control"
