@@ -10,7 +10,7 @@ build {
       "cd ${var.base_dir}",
       "git submodule add -b ${var.dotfiles_branch} ${var.dotfiles_repo} ${var.dotfiles_dir}",
       "git submodule update --init",
-      "(cd ${var.dotfiles_dir}; ./{var.dotfiles_script})"
+      "(cd ${var.dotfiles_dir}; ./${var.dotfiles_script})"
     ]
   }
 }
