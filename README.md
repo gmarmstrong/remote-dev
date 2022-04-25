@@ -7,7 +7,7 @@ This repository helps automate the provisioning of an ephemeral development serv
 deployed on an `e2-medium` [Compute Engine](https://cloud.google.com/compute) instance (in `us-east1-b` to fall in the
 free tier) with [Terraform](https://www.terraform.io/), all via [Cloud Build](https://cloud.google.com/cloud-build).
 
-### �� Generate your SSH key pair
+### 🔒 Generate your SSH key pair
 
 If you don't have an SSH key pair already, generate one (preferably with a high-entropy passphrase):
 
