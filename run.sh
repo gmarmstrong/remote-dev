@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -eu
+set -o errexit
+set -o nounset
 
 if [ $# -eq 0 ]
 then
