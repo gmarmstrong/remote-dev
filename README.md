@@ -1,48 +1,5 @@
 # This is a fork of [2n3g5c9/remote-dev](https://github.com/2n3g5c9/remote-dev)
 
-<div align="center">
-  <img width="512" src="https://raw.githubusercontent.com/2n3g5c9/remote-dev/master/img/banner.png" alt="remote-dev">
-</div>
-
-<p align="center">
-    <a href="#-diagram">Diagram</a>
-    &nbsp; • &nbsp;
-    <a href="#-prerequisites">Prerequisites</a>
-    &nbsp; • &nbsp;
-    <a href="#%EF%B8%8F-how-to-build-the-image">Build</a>
-    &nbsp; • &nbsp;
-    <a href="#-how-to-deploy-the-server">Deploy</a>
-    &nbsp; • &nbsp;
-    <a href="#-how-to-destroy-the-server">Destroy</a>
-    &nbsp; • &nbsp;
-    <a href="#-techframeworks-used">Tech/frameworks used</a>
-    &nbsp; • &nbsp;
-    <a href="#-license">License</a>
-</p>
-
-<p align="center">
-    <a href="https://results.pre-commit.ci/latest/github/2n3g5c9/remote-dev/master" aria-label="pre-commit.ci details" target="_blank" rel="noopener noreferrer">
-        <img src="https://results.pre-commit.ci/badge/github/2n3g5c9/remote-dev/master.svg" alt="pre-commit.ci status"/>
-    </a>
-    <a href="https://github.com/2n3g5c9/remote-dev/actions/workflows/terraform.yml">
-        <img src="https://github.com/2n3g5c9/remote-dev/actions/workflows/terraform.yml/badge.svg" alt="terraform-badge"/>
-    </a>
-</p>
-
-<p align="center">
-    <img src="https://img.shields.io/github/languages/count/2n3g5c9/remote-dev.svg?style=flat" alt="languages-badge"/>
-    <img src="https://img.shields.io/github/license/2n3g5c9/remote-dev" alt="license-badge">
-    <img src="https://img.shields.io/github/repo-size/2n3g5c9/remote-dev" alt="repo-size-badge">
-    <img src="https://img.shields.io/github/last-commit/2n3g5c9/remote-dev" alt="last-commit-badge">
-    <img src="https://img.shields.io/github/issues-raw/2n3g5c9/remote-dev" alt="open-issues-badge">
-</p>
-
-## 🖼 Diagram
-
-<p align="center">
-    <img src="https://raw.githubusercontent.com/2n3g5c9/remote-dev/master/img/diagram.png" alt="diagram" width="838px"/>
-</p>
-
 ## ✅ Prerequisites
 
 This repository helps automate the provisioning of an ephemeral development server on
@@ -59,70 +16,25 @@ If you don't have an SSH key pair already, generate one (preferably with a high-
 ssh-keygen -o -a 100 -t ed25519 -C remote-dev
 ```
 
-### Initialize the project
+### Configuration
 
-Open **Cloud Shell** and initialize the project:
-
-```bash
-export PROJECT_ID="INSERT_PROJECT_ID_HERE"
-gcloud config set project $PROJECT_ID
-```
-
-### Set the required permissions
-
-Run the permissions script to be able to call the services APIs:
-
-```bash
-./set_acls.sh $PROJECT_ID
-```
-
-### Setup Cloud Build
-
-Clone the `cloud-builders-community` repository:
-
-```bash
-mkdir gcloud && cd gcloud
-git clone https://github.com/GoogleCloudPlatform/cloud-builders-community.git && cd cloud-builders-community
-```
-
-In the `cloud-builders-community` repository, setup Packer for **Cloud Build**:
-
-```bash
-(cd packer; gcloud builds submit)
-```
-
-In the `cloud-builders-community` repository, setup Terraform for **Cloud Build**:
-
-```bash
-(cd terraform; gcloud builds submit --substitutions=_TERRAFORM_VERSION="1.0.5",_TERRAFORM_VERSION_SHA256SUM="7ce24478859ab7ca0ba4d8c9c12bb345f52e8efdc42fa3ef9dd30033dbf4b561")
-```
-
-## ⚙️ How to build the image
-
-In the `remote-dev` repository, submit the following **Cloud Build** job:
-
-```bash
-(cd packer; gcloud builds submit)
-```
++ In `remote-dev/terraform/env/prod/terraform.tfvars`, replace the SSH user/public key with your own values.
++ Modify the bootstrap/ directory to create your own environment
 
 ## 🚀 How to deploy the server
 
-In `remote-dev/terraform/env/prod/terraform.tfvars`, replace the SSH user/public key with your own values.
-
-Then in the `remote-dev` repository, submit the following **Cloud Build** jobs:
+In the `remote-dev` repository, run
 
 ```bash
-(cd terraform/states; gcloud builds submit)
-(cd terraform; gcloud builds submit)
+./run.sh create
 ```
 
 ## 🧨 How to destroy the server
 
-In the `remote-dev` repository, submit the following **Cloud Build** jobs:
+In the `remote-dev` repository, run
 
 ```bash
-(cd terraform; gcloud builds submit --config=cloudbuild-destroy.yaml)
-(cd terraform/states; gcloud builds submit --config=cloudbuild-destroy.yaml)
+./run.sh destroy
 ```
 
 ## 🪄 Tech/frameworks used
