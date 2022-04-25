@@ -50,7 +50,7 @@ resource "google_compute_instance" "this" {
 
   service_account {
     email  = data.google_compute_default_service_account.default.email
-    scopes = ["logging-write", "monitoring-write"]
+    scopes = [ "cloud-platform" ]
   }
 
   tags = ["remote-dev"]
