@@ -47,8 +47,8 @@ tf_build() {
 destroy() {
   (cd terraform; gcloud builds submit --config=cloudbuild-destroy.yaml)
   (cd terraform/states; gcloud builds submit --config=cloudbuild-destroy.yaml)
-  gsutil rm -r "gs://${PROJECT_ID}_logs"
-  gsutil rm -r "gs://${PROJECT_ID}_tf-state"
+  gsutil -m rm -r "gs://${PROJECT_ID}_logs"
+  gsutil -m rm -r "gs://${PROJECT_ID}_tf-state"
 }
 
 
