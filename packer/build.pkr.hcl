@@ -6,10 +6,7 @@ build {
       "SSH_USERNAME=${var.ssh_username}"
     ]
     inline = [
-      "git clone ${var.base_repo} ${var.base_dir}",
-      "cd ${var.base_dir}",
-      "git submodule add -b ${var.dotfiles_branch} ${var.dotfiles_repo} ${var.dotfiles_dir}",
-      "git submodule update --init",
+      "git clone --branch ${var.dotfiles_branch} ${var.dotfiles_repo} ${var.dotfiles_dir}",
       "(cd ${var.dotfiles_dir}; ./${var.dotfiles_script})"
     ]
   }

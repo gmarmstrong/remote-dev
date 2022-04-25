@@ -3,23 +3,6 @@ variable "gcp_project_id" {
   type = string
 }
 
-variable "base_repo" {
-  type = string
-  description = "URL of your remote-dev git repository"
-}
-
-variable "base_dir" {
-  type = string
-  default = "remote-dev"
-  description = "Directory name for base_repo"
-}
-
-variable "base_branch" {
-  type = string
-  default = "main"
-  description = "Branch name for branch_repo (e.g., main or master)"
-}
-
 variable "dotfiles_repo" {
   type = string
   description = "URL of your dotfiles git repository"

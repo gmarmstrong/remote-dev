@@ -13,7 +13,6 @@ then
 fi
 
 # Configuration
-
 export PROJECT_ID="gmarmstrong" # replace with your GCP project name
 export TERRAFORM_VERSION="1.1.9" # refer to https://www.terraform.io/downloads
 export TERRAFORM_VERSION_SHA256SUM="9d2d8a89f5cc8bc1c06cb6f34ce76ec4b99184b07eb776f8b39183b513d7798a"
@@ -25,29 +24,29 @@ export TERRAFORM_VERSION_SHA256SUM="9d2d8a89f5cc8bc1c06cb6f34ce76ec4b99184b07eb7
 gcloud config set project $PROJECT_ID
 
 set_permissions() {
-    ./set_acls.sh "$PROJECT_ID"
+  ./set_acls.sh "$PROJECT_ID"
 }
 
 builders_build() {
-    # set up Cloud Build
-    git submodule update --init
-    (cd cloud-builders-community/packer; gcloud builds submit)
-    (cd cloud-builders-community/terraform; gcloud builds submit \
-        --substitutions=_TERRAFORM_VERSION="$TERRAFORM_VERSION",_TERRAFORM_VERSION_SHA256SUM="$TERRAFORM_VERSION_SHA256SUM")
+  # set up Cloud Build
+  git submodule update --init
+  (cd cloud-builders-community/packer; gcloud builds submit)
+  (cd cloud-builders-community/terraform; gcloud builds submit \
+    --substitutions=_TERRAFORM_VERSION="$TERRAFORM_VERSION",_TERRAFORM_VERSION_SHA256SUM="$TERRAFORM_VERSION_SHA256SUM")
 }
 
 packer_build() {
-    (cd packer; gcloud builds submit)
+  (cd packer; gcloud builds submit)
 }
 
 tf_build() {
-    (cd terraform/states; gcloud builds submit)
-    (cd terraform; gcloud builds submit)
+  (cd terraform/states; gcloud builds submit)
+  (cd terraform; gcloud builds submit)
 }
 
 destroy() {
-    (cd terraform; gcloud builds submit --config=cloudbuild-destroy.yaml)
-    (cd terraform/states; gcloud builds submit --config=cloudbuild-destroy.yaml)
+  (cd terraform; gcloud builds submit --config=cloudbuild-destroy.yaml)
+  (cd terraform/states; gcloud builds submit --config=cloudbuild-destroy.yaml)
 }
 
 

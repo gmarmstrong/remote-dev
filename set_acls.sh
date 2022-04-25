@@ -5,8 +5,8 @@ set -o pipefail
 
 # Make sure a PROJECT_ID is passed
 if [ $# != 1 ]; then
-    echo "Usage: $0 PROJECT_ID"
-    exit 1
+  echo "Usage: $0 PROJECT_ID"
+  exit 1
 fi
 
 # Set variables
