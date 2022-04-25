@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
 set -eu
 
+if [ $# -eq 0 ]
+then
+  echo "usage: $0 <command>"
+  echo "where <command> is one of:"
+  echo -e "\tcreate"
+  echo -e "\tquick"
+  echo -e "\tdestroy"
+  exit 1
+fi
+
 # Configuration
 
 export PROJECT_ID="gmarmstrong" # replace with your GCP project name
 export TERRAFORM_VERSION="1.1.9" # refer to https://www.terraform.io/downloads
 export TERRAFORM_VERSION_SHA256SUM="9d2d8a89f5cc8bc1c06cb6f34ce76ec4b99184b07eb776f8b39183b513d7798a"
-# NOTE: TERRAFORM_VERSION must match sha256sum of CONNTENTS of
+# NOTE: TERRAFORM_VERSION must match sha256sum of CONTENTS of
 # https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
 # (of the terraform binary itself, not of the archive)
 
@@ -39,17 +49,18 @@ destroy() {
     (cd terraform/states; gcloud builds submit --config=cloudbuild-destroy.yaml)
 }
 
+
 if [ "$1" == "create" ] # launch the system
 then
-    set_permissions
-    builders_build
-    packer_build
-    tf_build
+  set_permissions
+  builders_build
+  packer_build
+  tf_build
 elif [ "$1" == "quick" ] # launch the system, skipping some steps
 then
-    packer_build
-    tf_build
+  packer_build
+  tf_build
 elif [ "$1" == "destroy" ] # shut down the system
 then
-    destroy
+  destroy
 fi

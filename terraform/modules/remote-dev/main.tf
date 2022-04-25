@@ -30,8 +30,8 @@ resource "google_compute_instance" "this" {
 
     #tfsec:ignore:google-compute-no-public-ip
     access_config {
-      nat_ip       = google_compute_address.static_external.address
       network_tier = "STANDARD"
+      // Ephemeral public IP. Set nat_ip for a static address (more expensive).
     }
   }
 
@@ -96,9 +96,9 @@ resource "google_compute_firewall" "egress" {
   }
 }
 
-resource "google_compute_address" "static_external" {
-  name        = "static-external"
-  description = "Static external IP address for the remote development server."
+resource "google_compute_address" "ephemeral_external" {
+  name = "ephemeral-external"
+  description = "Ephemeral external IP address for the remote development server."
 
   address_type = "EXTERNAL"
   network_tier = "STANDARD"
