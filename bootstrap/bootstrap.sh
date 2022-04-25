@@ -42,6 +42,7 @@ copy_dotfiles() {
     echo " ==> Copying dotfiles"
     cp config/aliases/aliases "${HOME}/.aliases"
     cp config/git/gitconfig "${HOME}/.gitconfig"
+    cp config/inputrc "${HOME}/.inputrc"
     mkdir -p "${HOME}/.config/nvim"
     cp -r config/nvim/* "${HOME}/.config/nvim/"
 }
