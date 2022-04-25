@@ -66,7 +66,7 @@ variable "gce_source_image_family" {
 }
 
 variable "gce_source_image_project_id" {
-  type    = []string
+  type    = list
   default = [ "ubuntu-os-cloud" ]
 }
 
