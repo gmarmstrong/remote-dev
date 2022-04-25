@@ -4,10 +4,31 @@ set -eu
 
 export DEBIAN_FRONTEND=noninteractive
 
+add_deb_repo() {
+  # e.g., add_deb_repo foobar foobar.gpg https://foobar.tld/ubuntu main contrib non-free
+  repository="/etc/apt/sources.list.d/${1}.list"
+  signed_by="/usr/share/keyrings/$2"
+  repo_uri="${3}"
+  components=("${@:4}")
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=$signed_by] $repo_uri $(lsb_release -cs)" "${components[@]}" \
+    | sudo tee "$repository" > /dev/null
+}
+
 apt_sources() {
-    echo " ==> Adds additional APT sources"
-    curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-    sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  echo " ==> Adding additional APT sources"
+  echo -e "\tInstalling APT-related packages"
+  sudo apt-get update
+  sudo apt-get install -y ca-certificates curl gnupg lsb-release software-properties-common
+
+  echo -e "\tImporting public keys"
+  curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor --yes -o /usr/share/keyrings/hashicorp-keyring.gpg
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+  echo -e "\tAdding apt repositories"
+  add_deb_repo docker docker-archive-keyring.gpg https://download.docker.com/linux/ubuntu stable
+  add_deb_repo github-cli githubcli-archive-keyring.gpg https://cli.github.com/packages main
+  add_deb_repo hashicorp hashicorp-keyring.gpg https://apt.releases.hashicorp.com main
 }
 
 apt_upgrade() {
@@ -20,14 +41,16 @@ apt_installs() {
     echo " ==> Installing base packages"
     sudo apt-get update
     sudo apt-get install -y \
-        git \
-        mosh \
-        neovim \
-        python3 \
-        python3-pip \
-        universal-ctags \
-        unzip \
-        xdg-utils
+      gh \
+      git \
+      mosh \
+      neovim \
+      python3 \
+      python3-pip \
+      terraform \
+      universal-ctags \
+      unzip \
+      xdg-utils
     sudo apt-get auto-remove -y
 }
 

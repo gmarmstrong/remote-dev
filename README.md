@@ -18,7 +18,8 @@ ssh-keygen -o -a 100 -t ed25519 -C remote-dev
 
 ### Configuration
 
-+ In `remote-dev/terraform/env/prod/terraform.tfvars`, replace the SSH user/public key with your own values.
++ In `remote-dev/terraform/env/prod/terraform.tfvars`, replace the SSH user/public key with your own values
++ Modify `remote-dev/packer/packer.json` as well
 + Modify the bootstrap/ directory to create your own environment
 
 ## 🚀 How to deploy the server
