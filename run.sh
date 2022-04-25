@@ -15,6 +15,14 @@ gcloud config set project $PROJECT_ID
 
 git submodule update --init
 
+just_update() {
+    # build the packer image
+    (cd packer; gcloud builds submit)
+    # deploy the server
+    (cd terraform/states; gcloud builds submit)
+    (cd terraform; gcloud builds submit)
+}
+
 if [ "$1" == "create" ] # launch the system
 then
     # set up permissions
@@ -23,11 +31,11 @@ then
     (cd cloud-builders-community/packer; gcloud builds submit)
     (cd cloud-builders-community/terraform; gcloud builds submit --substitutions=_TERRAFORM_VERSION="$TERRAFORM_VERSION",_TERRAFORM_VERSION_SHA256SUM="$TERRAFORM_VERSION_SHA256SUM")
     rm -rf gcloud
-    # build the packer image
-    (cd packer; gcloud builds submit)
-    # deploy the server
-    (cd terraform/states; gcloud builds submit)
-    (cd terraform; gcloud builds submit)
+    # build the packer image and deploy
+    just_update
+elif [ "$1" == "quick" ] # launch the system, skipping some steps
+then
+    just_update
 elif [ "$1" == "destroy" ] # shut down the system
 then
     (cd terraform; gcloud builds submit --config=cloudbuild-destroy.yaml)
