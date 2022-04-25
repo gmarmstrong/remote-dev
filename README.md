@@ -1,7 +1,5 @@
 # remote-dev
 
-This is a fork of [2n3g5c9/remote-dev](https://github.com/2n3g5c9/remote-dev).
-
 ## ✅ Prerequisites
 
 This repository helps automate the provisioning of an ephemeral development server on
@@ -9,7 +7,7 @@ This repository helps automate the provisioning of an ephemeral development serv
 deployed on an `e2-medium` [Compute Engine](https://cloud.google.com/compute) instance (in `us-east1-b` to fall in the
 free tier) with [Terraform](https://www.terraform.io/), all via [Cloud Build](https://cloud.google.com/cloud-build).
 
-### Generate your SSH key pair
+### �� Generate your SSH key pair
 
 If you don't have an SSH key pair already, generate one (preferably with a high-entropy passphrase):
 
@@ -17,7 +15,7 @@ If you don't have an SSH key pair already, generate one (preferably with a high-
 ssh-keygen -o -a 100 -t ed25519 -C remote-dev
 ```
 
-### Configuration
+### ⚙ Configuration
 
 + You must modify the following files:
   - `PROJECT_ID` in `run.sh`
@@ -42,10 +40,10 @@ In the `remote-dev` repository, run
 
 ## 🪄 Tech/frameworks used
 
-- [Google Cloud Build](https://cloud.google.com/cloud-build): A tool to "Continuously build, test, and deploy".
-- [Packer](https://www.packer.io/): A tool to "Build Automated Machine Images".
-- [Terraform](https://www.terraform.io/): A tool to "Write, Plan, and Create Infrastructure as Code".
+- [Google Cloud Build](https://cloud.google.com/build)
+- [Packer](https://www.packer.io/)
+- [Terraform](https://www.terraform.io/)
 
 ## 📃 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the MIT License—see the [LICENSE](LICENSE) file for details. This repository is a fork of [2n3g5c9/remote-dev](https://github.com/2n3g5c9/remote-dev).
