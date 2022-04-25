@@ -71,4 +71,4 @@ do_it() {
     vim_plugins_installs    # install vim plugin manager and plugins
 }
 
-do-it
+do_it
