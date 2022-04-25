@@ -4,7 +4,7 @@ source "googlecompute" "ubuntu" {
   image_family            = "${var.name}"
   image_name              = "packer-${var.name}-${local.timestamp}"
   network                 = "default"
-  project_id              = "${var.gce_project_id}"
+  project_id              = "${var.gcp_project_id}"
   scopes                  = [
     "https://www.googleapis.com/auth/userinfo.email",
     "https://www.googleapis.com/auth/compute",

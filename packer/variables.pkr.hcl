@@ -66,8 +66,8 @@ variable "gce_source_image_family" {
 }
 
 variable "gce_source_image_project_id" {
-  type    = string
-  default = "ubuntu-os-cloud"
+  type    = []string
+  default = [ "ubuntu-os-cloud" ]
 }
 
 # "timestamp" template function replacement
