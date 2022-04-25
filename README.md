@@ -1,11 +1,8 @@
 # remote-dev
 
-## ✅ Prerequisites
+Automatically provisions an ephemeral development server on Google Cloud Platform. An immutable machine image is built with [Packer](https://packer.io/) and deployed on a [Compute Engine](https://cloud.google.com/compute) instance with [Terraform](https://www.terraform.io/), all via [Cloud Build](https://cloud.google.com/cloud-build).
 
-This repository helps automate the provisioning of an ephemeral development server on
-[Google Cloud Platform](https://cloud.google.com/). An immutable image is built with [Packer](https://packer.io/) and
-deployed on an `e2-medium` [Compute Engine](https://cloud.google.com/compute) instance (in `us-east1-b` to fall in the
-free tier) with [Terraform](https://www.terraform.io/), all via [Cloud Build](https://cloud.google.com/cloud-build).
+## ✅ Prerequisites
 
 ### 🔒 Generate your SSH key pair
 
@@ -15,14 +12,12 @@ If you don't have an SSH key pair already, generate one (preferably with a high-
 ssh-keygen -o -a 100 -t ed25519 -C remote-dev
 ```
 
-### ⚙ Configuration
-
-+ You must modify the following files:
+### ⚙ Customize the configuration files:
   - `PROJECT_ID` in `run.sh`
   - `terraform/env/prod/terraform.tfvars`
   - `packer/config.auto.pkvars.hcl`
 
-## 🚀 How to deploy the server
+## 🚀 Deploy the server
 
 In the `remote-dev` repository, run
 
@@ -30,7 +25,7 @@ In the `remote-dev` repository, run
 ./run.sh create
 ```
 
-## 🧨 How to destroy the server
+## 🧨 Destroy the server
 
 In the `remote-dev` repository, run
 
@@ -38,7 +33,7 @@ In the `remote-dev` repository, run
 ./run.sh destroy
 ```
 
-## 🪄 Tech/frameworks used
+## 🪄 Tools used
 
 - [Google Cloud Build](https://cloud.google.com/build)
 - [Packer](https://www.packer.io/)
@@ -46,4 +41,4 @@ In the `remote-dev` repository, run
 
 ## 📃 License
 
-This project is licensed under the MIT License—see the [LICENSE](LICENSE) file for details. This repository is a fork of [2n3g5c9/remote-dev](https://github.com/2n3g5c9/remote-dev).
+This project (a fork of a fork of [2n3g5c9/remote-dev](https://github.com/2n3g5c9/remote-dev)) is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
