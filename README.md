@@ -41,4 +41,4 @@ In the `remote-dev` repository, run
 
 ## 📃 License
 
-This project (a fork of a fork of [2n3g5c9/remote-dev](https://github.com/2n3g5c9/remote-dev)) is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project (a fork of [2n3g5c9/remote-dev](https://github.com/2n3g5c9/remote-dev)) is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
