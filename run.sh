@@ -13,6 +13,8 @@ export TERRAFORM_VERSION_SHA256SUM="9d2d8a89f5cc8bc1c06cb6f34ce76ec4b99184b07eb7
 # Set project id
 gcloud config set project $PROJECT_ID
 
+git submodule update --init
+
 if [ "$1" == "create" ] # launch the system
 then
     # set up permissions
