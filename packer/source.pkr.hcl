@@ -11,6 +11,7 @@ source "googlecompute" "ubuntu" {
     "https://www.googleapis.com/auth/compute",
     "https://www.googleapis.com/auth/devstorage.full_control"
   ]
+  disk_size               = "${var.disk_size}"
   source_image_family     = "${var.gce_source_image_family}"
   source_image_project_id = "${var.gce_source_image_project_id}"
   ssh_username            = "${var.ssh_username}"

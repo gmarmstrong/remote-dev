@@ -3,6 +3,12 @@ variable "gcp_project_id" {
   type = string
 }
 
+variable "disk_size" {
+  type = number
+  default = 20
+  description = "The size of the disk in GB."
+}
+
 variable "dotfiles_repo" {
   type = string
   description = "URL of your dotfiles git repository"
