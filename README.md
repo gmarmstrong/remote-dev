@@ -25,6 +25,15 @@ In the `remote-dev` repository, run
 ./run.sh create
 ```
 
+Then to authenticate and log in, run
+
+```bash
+# replace us-east1-b, alice@remote-dev, and project-name with your own values
+gcloud compute ssh --zone "us-east1-b" "alice@remote-dev" --tunnel-through-iap --project "project-name"
+gcloud-compute config-ssh
+# Add "User=alice" to new entry in ~/.ssh/config if host/guest usernames don't match
+```
+
 ## 🧨 Destroy the server
 
 In the `remote-dev` repository, run
