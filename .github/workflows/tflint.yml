@@ -1,17 +1,12 @@
 name: "Lint Checks"
 
 on:
-  workflow_dispatch:
-  push:
-    paths:
-      - "**.tf"
-      - ".github/workflows/tflint.yml"
-      - "tflints.sh"
   pull_request:
     paths:
-      - "**.tf"
+      - "terraform/"
       - ".github/workflows/tflint.yml"
       - "tflints.sh"
+  workflow_dispatch:
 
 jobs:
   tflint:
