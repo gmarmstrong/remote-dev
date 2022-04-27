@@ -6,9 +6,9 @@ Automatically provisions an ephemeral development server on Google Cloud Platfor
 
 ## Usage
 
-### ✅ Prerequisites
+### :white_check_mark: Prerequisites
 
-#### 🔒 Generate your SSH key pair
+#### :lock: Generate your SSH key pair
 
 If you don't have an SSH key pair already, generate one (preferably with a high-entropy passphrase):
 
@@ -16,12 +16,13 @@ If you don't have an SSH key pair already, generate one (preferably with a high-
 ssh-keygen -o -a 100 -t ed25519 -C remote-dev
 ```
 
-#### ⚙ Customize the configuration files:
+#### :gear: Customize the configuration files:
+
   - `PROJECT_ID` in `run.sh`
   - `terraform/env/prod/terraform.tfvars`
   - `packer/config.auto.pkvars.hcl`
 
-### 🚀 Deploy the server
+### :rocket: Deploy the server
 
 In the `remote-dev` repository, run
 
@@ -38,7 +39,7 @@ gcloud-compute config-ssh
 # Add "User=alice" to new entry in ~/.ssh/config if host/guest usernames don't match
 ```
 
-### 🧨 Destroy the server
+### :collision: Destroy the server
 
 In the `remote-dev` repository, run
 
@@ -46,9 +47,9 @@ In the `remote-dev` repository, run
 ./run.sh destroy
 ```
 
-## ℹ️ About
+## :information_source: About
 
-### 🪄 Tools used
+### :toolbox: Tools used
 
 - [Google Cloud Build](https://cloud.google.com/build)
 - [Packer](https://www.packer.io/)
