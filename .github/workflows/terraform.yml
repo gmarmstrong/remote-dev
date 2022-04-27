@@ -30,17 +30,8 @@ jobs:
       with:
         tflint_version: latest
 
-    - name: Show TFLint version
-      run: tflint --version
-
-    - name: TFLint terraform/modules/remote-dev
-      run: (cd terraform/modules/remote-dev; tflint --init; tflint -f compact)
-
-    - name: TFLint terraform/states
-      run: (cd terraform/states; tflint --init; tflint -f compact)
-
-    - name: TFLint terraform/env/prod
-      run: (cd terraform/env/prod; tflint --init; tflint -f compact)
+    - name: Run TFLint
+      run: ./tflints.sh
 
   tfsec:
     name: Terraform Security Checks
