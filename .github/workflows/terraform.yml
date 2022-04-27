@@ -17,8 +17,8 @@ on:
     strategy:
       matrix:
         working_directory: [
-          "terraform/modules/remote-dev"
-          "terraform/states"
+          "terraform/modules/remote-dev",
+          "terraform/states",
           "terraform/env"
         ]
 
