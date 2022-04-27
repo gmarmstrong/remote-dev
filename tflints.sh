@@ -26,11 +26,13 @@ for module_dir in "${module_dirs[@]}"; do
   (
     cd "${module_dir}"
     terraform init -backend=false
+    tflint --init
     profiles=()
     readarray -O ${#profiles[@]} -t profiles < <(find . -maxdepth 1 -type f -name 'terraform.tfvars.*' -printf '%f\n')
     readarray -O ${#profiles[@]} -t profiles < <(find . -maxdepth 1 -type f -name '*.tfvars' -printf '%f\n')
     if [[ ${#profiles[@]} -gt 0 ]]; then
       for profile in "${profiles[@]}"; do
+        tflint --init
         # profiles are .tfvars files, configs are .tflint.hcl files
         if [[ ".tflint.hcl" ]]; then
           if [[ config_arg != "" ]]; then
