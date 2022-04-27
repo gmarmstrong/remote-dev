@@ -11,8 +11,9 @@ on:
       - "**.tf"
       - ".github/workflows/terraform.yml"
 
-jobs:
-  working_directory_matrix:
+  tflint:
+    name: Terraform Lint Checks
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         working_directory: [
@@ -21,9 +22,6 @@ jobs:
           "terraform/env"
         ]
 
-  tflint:
-    name: Terraform Lint Checks
-    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
       name: Checkout source code
