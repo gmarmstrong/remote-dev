@@ -3,12 +3,12 @@ name: "Terraform Checks"
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - "**.tf"
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - "**.tf"
 
