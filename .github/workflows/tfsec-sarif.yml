@@ -1,4 +1,4 @@
-name: TFSec Sarif Report
+name: TFSec
 on:
   push:
     paths:
@@ -22,7 +22,7 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@main
 
-      - name: tfsec sarif
+      - name: TFSec Sarif
         uses: aquasecurity/tfsec-sarif-action@master
         with:
           sarif_file: tfsec.sarif
