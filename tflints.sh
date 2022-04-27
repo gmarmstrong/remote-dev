@@ -4,6 +4,7 @@
 
 set -eo pipefail
 
+terraform --version
 tflint --version
 
 config_file="$(git rev-parse --show-toplevel)/.tflint.hcl"
