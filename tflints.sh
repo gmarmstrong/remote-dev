@@ -34,7 +34,7 @@ for module_dir in "${module_dirs[@]}"; do
       for profile in "${profiles[@]}"; do
         tflint --init
         # profiles are .tfvars files, configs are .tflint.hcl files
-        if [[ ".tflint.hcl" ]]; then
+        if [[ -f ".tflint.hcl" ]]; then
           if [[ config_arg != "" ]]; then
             echo "Warning: found both global and local tflint configs. Using the local one."
           fi
