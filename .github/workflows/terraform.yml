@@ -11,6 +11,7 @@ on:
       - "**.tf"
       - ".github/workflows/terraform.yml"
 
+jobs:
   tflint:
     name: Terraform Lint Checks
     runs-on: ubuntu-latest
