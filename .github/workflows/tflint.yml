@@ -1,0 +1,37 @@
+name: "Lint Checks"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "**.tf"
+      - ".github/workflows/terraform.yml"
+      - "tflints.sh"
+  pull_request:
+    paths:
+      - "**.tf"
+      - ".github/workflows/terraform.yml"
+      - "tflints.sh"
+
+jobs:
+  tflint:
+    name: Terraform Lint Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout source code
+
+      - uses: actions/cache@v3
+        name: Cache plugin dir
+        with:
+          path: ~/.tflint.d/plugins
+          key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v1
+        with:
+          tflint_version: latest
+
+      - name: Run TFLint
+        run: ./tflints.sh
