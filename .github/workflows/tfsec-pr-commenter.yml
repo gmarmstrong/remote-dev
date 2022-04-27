@@ -10,11 +10,31 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v3
 
+      #- name: tfsec
+      #  uses: aquasecurity/tfsec-pr-commenter-action@v1
+      #  with:
+      #    github_token: ${{ github.token }}
+      #    working_directory: terraform
+      #    tfsec_arguments: --force-all-dirs
+      #    tfsec_formats: default,sarif
+
       - name: tfsec
         uses: gmarmstrong/tfsec-pr-commenter-action@fix-file-path
-        #uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
         with:
           github_token: ${{ github.token }}
-          working_directory: terraform
-          tfsec_args: --force-all-dirs
+          working_directory: terraform/states
+          tfsec_formats: default,sarif
+
+      - name: tfsec
+        uses: gmarmstrong/tfsec-pr-commenter-action@fix-file-path
+        with:
+          github_token: ${{ github.token }}
+          working_directory: terraform/remote-dev
+          tfsec_formats: default,sarif
+
+      - name: tfsec
+        uses: gmarmstrong/tfsec-pr-commenter-action@fix-file-path
+        with:
+          github_token: ${{ github.token }}
+          working_directory: terraform/env/prod
           tfsec_formats: default,sarif
