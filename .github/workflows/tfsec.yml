@@ -11,6 +11,9 @@ on:
   workflow_dispatch:
 
 jobs:
+  # FIXME does not upload
+  # TODO see also https://github.com/aquasecurity/tfsec-sarif-action/pull/25
+  # TODO pass or fail build based on result
   tfsec:
     name: tfsec sarif report
     runs-on: ubuntu-latest
