@@ -1,16 +1,15 @@
 name: "Terraform Checks"
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main
     paths:
       - "**.tf"
+      - ".github/workflows/terraform.yml"
   pull_request:
-    branches:
-      - main
     paths:
       - "**.tf"
+      - ".github/workflows/terraform.yml"
 
 jobs:
   tflint:
