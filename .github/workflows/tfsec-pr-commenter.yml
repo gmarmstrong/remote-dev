@@ -1,4 +1,4 @@
-name: TFSec
+name: TFSec Sarif
 on:
   pull_request:
 jobs:

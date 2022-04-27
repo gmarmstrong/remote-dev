@@ -1,4 +1,4 @@
-name: tfsec
+name: TFSec Sarif Report
 on:
   push:
     paths:
