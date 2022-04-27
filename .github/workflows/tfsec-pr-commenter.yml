@@ -9,10 +9,14 @@ jobs:
     steps:
       - name: Clone repo
         uses: actions/checkout@v3
+
+      - name: Delete cloud-builders-community
+        run: rm -rf cloud-builders-community
+        # workaround since pr commenter cannot specify terraform/ working directory due to known bug
+
       - name: tfsec
         uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
         with:
           github_token: ${{ github.token }}
-          working_directory: terraform
           tfsec_args: --force-all-dirs
           tfsec_formats: default,sarif
