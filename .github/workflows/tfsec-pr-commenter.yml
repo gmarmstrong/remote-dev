@@ -18,8 +18,8 @@ jobs:
       #    tfsec_arguments: --force-all-dirs
       #    tfsec_formats: default,sarif
 
-      - name: cd terraform/states
-        run: cd terraform/states
+      - name: cd modules/remote-dev
+        run: cd modules/remote-dev
 
       - name: tfsec
         uses: gmarmstrong/tfsec-pr-commenter-action@fix-file-path
