@@ -40,10 +40,10 @@ for module_dir in "${module_dirs[@]}"; do
           fi
           config_arg="--config=.tflint.hcl"
         fi
-        tflint --var-file="$profile" "$config_arg"
+        tflint --var-file="$profile" $config_arg # intentionally omitting quotes around $config_arg
       done
     else
-    tflint "$config_arg"
+    tflint $config_arg # intentionally omitting quotes around $config_arg
 
     fi
   )
