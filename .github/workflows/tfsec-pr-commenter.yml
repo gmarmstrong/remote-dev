@@ -29,7 +29,7 @@ jobs:
         uses: gmarmstrong/tfsec-pr-commenter-action@fix-file-path
         with:
           github_token: ${{ github.token }}
-          working_directory: terraform/remote-dev
+          working_directory: terraform/modules/remote-dev
           tfsec_formats: default,sarif
 
       - name: tfsec
