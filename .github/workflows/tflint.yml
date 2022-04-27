@@ -5,12 +5,12 @@ on:
   push:
     paths:
       - "**.tf"
-      - ".github/workflows/terraform.yml"
+      - ".github/workflows/tflint.yml"
       - "tflints.sh"
   pull_request:
     paths:
       - "**.tf"
-      - ".github/workflows/terraform.yml"
+      - ".github/workflows/tflint.yml"
       - "tflints.sh"
 
 jobs:
