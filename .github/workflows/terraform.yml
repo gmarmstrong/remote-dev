@@ -12,32 +12,44 @@ on:
       - ".github/workflows/terraform.yml"
 
 jobs:
+  working_directory_matrix:
+    strategy:
+      matrix:
+        working_directory: [
+          "terraform/modules/remote-dev"
+          "terraform/states"
+          "terraform/env"
+        ]
+
   tflint:
     name: Terraform Lint Checks
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code 🛎
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+    - uses: actions/checkout@v3
+      name: Checkout source code
 
-      - name: Install TFLint ⏬
-        run: curl https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+    - uses: actions/cache@v3
+      name: Cache plugin dir
+      with:
+        path: ~/.tflint.d/plugins
+        key: ${{ matrix.os }}-tflint-${{ hashFiles('.tflint.hcl') }}
 
-      - name: Download TFLint GCP plugin ⏬
-        env:
-          TFLINT_RULESET_GCP_VERSION: v0.10.0
-          TFLINT_RULESET_GCP_SHA256: ca15ccad281ba4855f6d809eb129036a2b86aa358207172186a2ea8c429cd763
-        run: |
-          mkdir -p ~/.tflint.d/plugins && cd ~/.tflint.d/plugins
-          wget -q https://github.com/terraform-linters/tflint-ruleset-google/releases/download/$TFLINT_RULESET_GCP_VERSION/tflint-ruleset-google_linux_amd64.zip
-          echo "$TFLINT_RULESET_GCP_SHA256 tflint-ruleset-google_linux_amd64.zip" | sha256sum --check
-          unzip tflint-ruleset-google_linux_amd64.zip
+    - name: Setup TFLint
+      uses: terraform-linters/setup-tflint@v1
+      with:
+        tflint_version: latest
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run Terraform Lint Checks 🔍
-        run: |
-          (cd terraform/modules/remote-dev; tflint)
+    - name: Show TFLint version
+      run: tflint --version
+
+    - name: Init TFLint
+      # Runs in each working_directory concurrently.
+      run: (cd {{ matrix.working_directory }}; tflint --init)
+
+    - name: Run TFLint
+      # Runs in each working_directory concurrently.
+      run: (cd {{ matrix.working_directory }}; tflint -f compact)
 
   tfsec:
     name: Terraform Security Checks
