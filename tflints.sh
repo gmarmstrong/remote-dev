@@ -36,7 +36,7 @@ for module_dir in "${module_dirs[@]}"; do
           if [[ config_arg != "" ]]; then
             echo "Warning: found both global and local tflint configs. Using the local one."
           fi
-          config_arg="--config=$config_file"
+          config_arg="--config=.tflint.hcl"
         fi
         tflint --var-file="$profile" "$config_arg"
       done
