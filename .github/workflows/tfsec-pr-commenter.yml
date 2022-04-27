@@ -1,25 +1,20 @@
-name: tfsec-pr-commenter
+name: TFSec
 on:
   pull_request:
 jobs:
   tfsec:
-    name: tfsec PR commenter
+    name: TFSec PR commenter
     runs-on: ubuntu-latest
 
     steps:
       - name: Clone repo
         uses: actions/checkout@v3
 
-      #- name: tfsec
-      #  uses: aquasecurity/tfsec-pr-commenter-action@v1
-      #  with:
-      #    github_token: ${{ github.token }}
-      #    working_directory: terraform
-      #    tfsec_arguments: --force-all-dirs
-      #    tfsec_formats: default,sarif
-
-      - name: tfsec
-        uses: gmarmstrong/tfsec-pr-commenter-action@fix-file-path
+      - name: TFSec PR Commenter
+        uses: aquasecurity/tfsec-pr-commenter-action@v1
+        # FIXME https://github.com/aquasecurity/tfsec-pr-commenter-action/issues/54
         with:
           github_token: ${{ github.token }}
-          working_directory: terraform/modules/remote-dev
+          working_directory: terraform
+          tfsec_arguments: --force-all-dirs
+          tfsec_formats: default,sarif
