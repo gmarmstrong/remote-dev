@@ -1,5 +1,9 @@
 name: TFSec
 on:
+  push:
+    paths:
+      - "terraform/"
+      - ".github/workflows/tfsec.yml"
   pull_request:
     paths:
       - "terraform/"
