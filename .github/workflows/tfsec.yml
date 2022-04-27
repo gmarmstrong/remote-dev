@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: tfsec sarif
-        uses: dansanabria/tfsec-sarif-action@fix-url-typo
+        uses: aquasecurity/tfsec-sarif-action@master
         with:
           sarif_file: tfsec.sarif
           full_repo_scan: true
