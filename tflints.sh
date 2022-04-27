@@ -7,7 +7,10 @@ set -eo pipefail
 terraform --version
 tflint --version
 
-config_file="$(git rev-parse --show-toplevel)/.tflint.hcl"
+config_file="$(git rev-parse --show-toplevel)/terraform/.tflint.hcl"
+if [[ -f "$config_file" ]]; then # if root tflint config exists
+  config_arg="--config=$config_file"
+fi
 
 echo "Scanning the modules"
 readarray -t module_dirs < <(find . -name .terraform -prune , -type f -name '*.tf' -printf '%h\n' | sort | uniq)
@@ -25,16 +28,18 @@ for module_dir in "${module_dirs[@]}"; do
     readarray -O ${#profiles[@]} -t profiles < <(find . -maxdepth 1 -type f -name '*.tfvars' -printf '%f\n')
     if [[ ${#profiles[@]} -gt 0 ]]; then
       for profile in "${profiles[@]}"; do
-        echo
-        echo "Using variable values from: ${profile}"
-        echo
-        tflint --config="${config_file}" --var-file="${profile}"
+        # profiles are .tfvars files, configs are .tflint.hcl files
+        if [[ ".tflint.hcl" ]]; then
+          if [[ config_arg ]]; then
+            echo "Warning: found both root and local tflint configs. Using the local one."
+          fi
+          config_arg="--$config_file"
+        fi
+        tflint --var-file="$profile" "$config_arg"
       done
     else
-      echo
-      echo "Using default variable values"
-      echo
-      tflint --config="${config_file}"
+    tflint "$config_arg"
+
     fi
   )
 done
