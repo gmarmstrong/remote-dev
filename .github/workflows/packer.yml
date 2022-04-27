@@ -5,7 +5,7 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   packer:
     runs-on: ubuntu-latest
-    name: packer
+    name: Validate Packer template
 
     steps:
       - name: Checkout Repository
@@ -19,18 +19,3 @@ jobs:
           arguments: -syntax-only
           target: .
           working_directory: packer
-
-      # build artifact
-      - name: Build Artifact
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: build
-          arguments: "-color=false -on-error=abort"
-          target: .
-          working_directory: packer
-        env:
-          PACKER_LOG: 1
-          HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
-          HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
-
-      # additional steps to process artifacts
