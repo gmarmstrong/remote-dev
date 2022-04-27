@@ -1,6 +1,11 @@
 name: "Lint Checks"
 
 on:
+  push:
+    paths:
+      - "terraform/"
+      - ".github/workflows/tflint.yml"
+      - "tflints.sh"
   pull_request:
     paths:
       - "terraform/"
