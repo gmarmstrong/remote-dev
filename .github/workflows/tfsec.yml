@@ -25,4 +25,7 @@ jobs:
       - name: Run Terraform Security Checks 🔍
         uses: triat/terraform-security-scan@v3
         with:
-          tfsec_actions_working_dir: terraform/modules/remote-dev
+          tfsec_actions_working_dir: 
+            - terraform/modules/remote-dev
+            - terraform/modules/remote-dev
+            - terraform/modules/remote-dev
