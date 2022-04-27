@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: tfsec sarif
-        uses: tfsec/tfsec-sarif-action@master
+        uses: dansanabria/tfsec-sarif-action@fix-url-typo
         with:
           sarif_file: tfsec.sarif         
           working_directory: terraform/
