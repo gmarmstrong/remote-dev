@@ -1,9 +1,14 @@
 name: Packer
 
 on:
+  push:
+    paths:
+      - "packer/"
+      - ".github/workflows/packer.yml"
   pull_request:
-    - "packer/"
-    - ".github/workflows/packer.yml"
+    paths:
+      - "packer/"
+      - ".github/workflows/packer.yml"
   workflow_dispatch:
 
 jobs:
