@@ -10,13 +10,11 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v3
 
-      - name: Change working directory
-        # pr commenter cannot specify working directory due to known bug
-        run: cd terraform
-
       - name: tfsec
-        uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
+        uses: gmarmstrong/tfsec-pr-commenter-action@fix-file-path
+        #uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
         with:
           github_token: ${{ github.token }}
+          working_directory: terraform
           tfsec_args: --force-all-dirs
           tfsec_formats: default,sarif
