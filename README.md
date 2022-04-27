@@ -1,6 +1,6 @@
 # Remote Development _(remote-dev)_
 
-[![Terraform Checks](https://github.com/gmarmstrong/remote-dev/actions/workflows/terraform.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/terraform.yml)
+[![Lint Checks](https://github.com/gmarmstrong/remote-dev/actions/workflows/tflint.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/tflint.yml) [![Security Checks](https://github.com/gmarmstrong/remote-dev/actions/workflows/tfsec.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/tfsec.yml)
 
 Automatically provisions an ephemeral development server on Google Cloud Platform. An immutable machine image is built with [Packer](https://packer.io/) and deployed on a [Compute Engine](https://cloud.google.com/compute) instance with [Terraform](https://www.terraform.io/), all via [Cloud Build](https://cloud.google.com/cloud-build).
 
