@@ -26,6 +26,11 @@ variable "ssh_user" {
   type = string
 }
 
+variable "source_ranges" {
+  type = list(string)
+  default = "35.235.240.0/20" # the GCP IAP source address range
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS
 # These variables have defaults, but may be overridden by the operator.
