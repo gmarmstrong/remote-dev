@@ -79,7 +79,8 @@ instance as a backend for IntelliJ and VS Code. For example, after installing
 [the Cloud Code extension for VS Code](https://marketplace.visualstudio.com/items?itemName=GoogleCloudTools.cloudcode),
 open the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>)
 and select `Cloud Code: Open in Cloud Shell...`, then select "Home" and your project
-ID, and proceed iff the server's fingerprint is correct.
+ID, and proceed iff the server's fingerprint is correct. From there, `./run.sh create`
+(if you hadn't already) and then SSH into your machine.
 
 ### :collision: Destroy the server
 
