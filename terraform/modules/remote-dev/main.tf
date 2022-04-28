@@ -13,7 +13,6 @@ data "google_compute_image" "this" {
   project = var.project
 }
 
-#tfsec:ignore:google-compute-vm-disk-encryption-customer-key
 resource "google_compute_instance" "this" {
   name         = "remote-dev"
   machine_type = var.machine_type
@@ -27,12 +26,6 @@ resource "google_compute_instance" "this" {
 
   network_interface {
     network = "default"
-
-    #tfsec:ignore:google-compute-no-public-ip
-    access_config {
-      network_tier = "STANDARD"
-      // Ephemeral public IP. Set nat_ip for a static address (more expensive).
-    }
   }
 
   allow_stopping_for_update = true
@@ -69,6 +62,7 @@ resource "google_compute_firewall" "ingress" {
   network = "default"
 
   direction     = "INGRESS"
+  source_ranges = var.source_ranges
   target_tags   = ["remote-dev"]
 
   allow {
@@ -78,7 +72,7 @@ resource "google_compute_firewall" "ingress" {
 
   allow {
     protocol = "udp"
-    ports    = ["60000-61000"]
+    ports    = ["60000-61000"] # TODO needed?
   }
 }
 
@@ -87,7 +81,7 @@ resource "google_compute_firewall" "egress" {
   network = "default"
 
   direction          = "EGRESS"
-  destination_ranges = ["0.0.0.0/0"] #tfsec:ignore:google-compute-no-public-egress
+  destination_ranges = ["0.0.0.0/0"]
   target_tags        = ["remote-dev"]
 
   allow {
