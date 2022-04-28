@@ -3,7 +3,7 @@ name: Packer
 on:
   push:
     paths:
-      - "packer/"
+      - "packer/**"
       - ".github/workflows/packer.yml"
   workflow_dispatch:
 
