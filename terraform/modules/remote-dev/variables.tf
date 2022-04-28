@@ -28,7 +28,9 @@ variable "ssh_user" {
 
 variable "source_ranges" {
   type = list(string)
-  default = "35.235.240.0/20" # the GCP IAP source address range
+  default = [
+    "35.235.240.0/20" # the GCP IAP source address range
+  ]
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
