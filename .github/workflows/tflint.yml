@@ -6,11 +6,6 @@ on:
       - "terraform/"
       - ".github/workflows/tflint.yml"
       - "tflints.sh"
-  pull_request:
-    paths:
-      - "terraform/"
-      - ".github/workflows/tflint.yml"
-      - "tflints.sh"
   workflow_dispatch:
 
 jobs:

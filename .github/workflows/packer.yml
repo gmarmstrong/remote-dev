@@ -5,10 +5,6 @@ on:
     paths:
       - "packer/"
       - ".github/workflows/packer.yml"
-  pull_request:
-    paths:
-      - "packer/"
-      - ".github/workflows/packer.yml"
   workflow_dispatch:
 
 jobs:
