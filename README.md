@@ -55,6 +55,6 @@ In the `remote-dev` repository, run
 - [Packer](https://www.packer.io/)
 - [Terraform](https://www.terraform.io/)
 
-### 📃 License
+### :page_with_curl: License
 
 This project (being derivative of [2n3g5c9/remote-dev](https://github.com/2n3g5c9/remote-dev)) is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
