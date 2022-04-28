@@ -56,15 +56,15 @@ In the `remote-dev` repository, run
 ./run.sh create
 ```
 
-To log in for the first time, you'll need to go to
+### Logging in
+
+Before logging in for the first time, you'll need to go to
 <https://console.cloud.google.com/security/iap> and make sure that IAP is
 working properly. Specifically, you'll need a [firewall
 rule](https://console.cloud.google.com/networking/firewalls) allowing
 TCP-protocol ingress to the `remote-dev` target from IPv4 source range
 35.235.240.0/20. To do so programatically,
 [see here](https://cloud.google.com/vpc/docs/using-firewalls#gcloud).
-
-### Logging in
 
 Then to authenticate and log in, run
 
