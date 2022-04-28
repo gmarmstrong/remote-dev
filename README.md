@@ -17,7 +17,7 @@ billing account. Please [read the license (MIT)](LICENSE) before
 proceeding, with emphasis on
 `"[...] IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, [...]`
 
-- Additionally, this project still in early development and **is not production-ready.** Security scans by
+- Additionally, this project is still in early development and **is not production-ready.** Security scans by
 Snyk detect (as of
 [commit `459f170`](https://github.com/gmarmstrong/remote-dev/tree/459f17028747ebd3f8778dd2f5296e3f5cd000dd)),
 **7 "low severity misconfigurations"** in the Terraform design including, possibly non-exhaustively, the following:
@@ -63,7 +63,7 @@ Before logging in for the first time, you'll need to go to
 working properly. Specifically, you'll need a [firewall
 rule](https://console.cloud.google.com/networking/firewalls) allowing
 TCP-protocol ingress to the `remote-dev` target from IPv4 source range
-35.235.240.0/20. To do so programatically,
+35.235.240.0/20. To do so programmatically,
 [see here](https://cloud.google.com/vpc/docs/using-firewalls#gcloud).
 
 Then to authenticate and log in, run
@@ -85,7 +85,7 @@ ID, and proceed iff the server's fingerprint is correct. From there, `./run.sh c
 ### :collision: Destroy the server
 
 **Caution:** the keyword here was _ephemeral_: this action will delete the whole
-environment and all the data inside of it. Push your changes to whatever you
+environment and all the data inside it. Push your changes to whatever you
 were working on before destroying your system.
 
 In the `remote-dev` repository, run
