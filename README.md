@@ -1,6 +1,6 @@
 # Remote Development _(remote-dev)_
 
-[![Packer](https://github.com/gmarmstrong/remote-dev/actions/workflows/packer.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/packer.yml) [![Lint Checks](https://github.com/gmarmstrong/remote-dev/actions/workflows/tflint.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/tflint.yml) <!-- [![TFSec](https://github.com/gmarmstrong/remote-dev/actions/workflows/tfsec.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/tfsec.yml) -->
+[![Packer](https://github.com/gmarmstrong/remote-dev/actions/workflows/packer.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/packer.yml) [![Lint Checks](https://github.com/gmarmstrong/remote-dev/actions/workflows/tflint.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/tflint.yml)
 
 Automatically provisions an ephemeral development server on Google Cloud Platform. An immutable machine image is built with [Packer](https://packer.io/) and deployed on a [Compute Engine](https://cloud.google.com/compute) instance with [Terraform](https://www.terraform.io/), all via [Cloud Build](https://cloud.google.com/cloud-build).
 
@@ -35,9 +35,9 @@ Then to authenticate and log in, run
 ```bash
 # replace us-east1-b, alice@remote-dev, and project-name with your own values
 gcloud compute ssh --zone "us-east1-b" "alice@remote-dev" --tunnel-through-iap --project "project-name"
-gcloud-compute config-ssh
-# Add "User=alice" to new entry in ~/.ssh/config if host/guest usernames don't match
 ```
+
+To log in for the first time, you'll need to go to <https://console.cloud.google.com/security/iap> and make sure that IAP is working properly. Specifically, you'll need a [firewall rule](https://console.cloud.google.com/networking/firewalls) allowing TCP-protocol ingress to the `remote-dev` target from IPv4 source range 35.235.240.0/20.
 
 ### :collision: Destroy the server
 
