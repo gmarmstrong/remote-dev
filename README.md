@@ -64,6 +64,8 @@ TCP-protocol ingress to the `remote-dev` target from IPv4 source range
 35.235.240.0/20. To do so programatically,
 [see here](https://cloud.google.com/vpc/docs/using-firewalls#gcloud).
 
+### Logging in
+
 Then to authenticate and log in, run
 
 ```bash
@@ -71,9 +73,13 @@ Then to authenticate and log in, run
 gcloud compute ssh --zone "us-east1-b" "alice@remote-dev" --tunnel-through-iap --project "project-name"
 ```
 
-There you go, you're on a fancy new 
-If you use, for example, a JetBrains IDE (e.g., IntelliJ IDEA, PyCharm, etc.)
-or VS Code, you can use Cloud Code
+In addition to accessing the new machine this way, you can also use
+[Cloud Code extensions](https://cloud.google.com/code/docs) to use your
+instance as a backend for IntelliJ and VS Code. For example, after installing
+[the Cloud Code extension for VS Code](https://marketplace.visualstudio.com/items?itemName=GoogleCloudTools.cloudcode),
+open the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>)
+and select `Cloud Code: Open in Cloud Shell...`, then select "Home" and your project
+ID, and proceed iff the server's fingerprint is correct.
 
 ### :collision: Destroy the server
 
