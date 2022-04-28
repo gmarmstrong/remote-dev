@@ -1,6 +1,6 @@
 # Remote Development _(remote-dev)_
 
-[![Packer](https://github.com/gmarmstrong/remote-dev/actions/workflows/packer.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/packer.yml) [![Lint Checks](https://github.com/gmarmstrong/remote-dev/actions/workflows/tflint.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/tflint.yml)
+[![GitHub](https://img.shields.io/github/license/gmarmstrong/remote-dev)](https://github.com/gmarmstrong/remote-dev/blob/main/LICENSE) [![Packer](https://github.com/gmarmstrong/remote-dev/actions/workflows/packer.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/packer.yml) [![Lint Checks](https://github.com/gmarmstrong/remote-dev/actions/workflows/tflint.yml/badge.svg)](https://github.com/gmarmstrong/remote-dev/actions/workflows/tflint.yml)
 
 Automatically provisions an ephemeral development server on Google Cloud Platform. An immutable machine image is built with [Packer](https://packer.io/) and deployed on a [Compute Engine](https://cloud.google.com/compute) instance with [Terraform](https://www.terraform.io/), all via [Cloud Build](https://cloud.google.com/cloud-build).
 
