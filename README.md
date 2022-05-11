@@ -73,14 +73,26 @@ Then to authenticate and log in, run
 gcloud compute ssh --zone "us-east1-b" "alice@remote-dev" --tunnel-through-iap --project "project-name"
 ```
 
+### Using remote-dev as an IDE backend
+
 In addition to accessing the new machine this way, you can also use
 [Cloud Code extensions](https://cloud.google.com/code/docs) to use your
-instance as a backend for IntelliJ and VS Code. For example, after installing
+instance as a backend for IntelliJ and VS Code.
+
+For example, **if you use a public IP address** (which this project avoids
+for better security by default), then after installing
 [the Cloud Code extension for VS Code](https://marketplace.visualstudio.com/items?itemName=GoogleCloudTools.cloudcode),
 open the command palette (<kbd>Ctrl/Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>)
 and select `Cloud Code: Open in Cloud Shell...`, then select "Home" and your project
 ID, and proceed iff the server's fingerprint is correct. From there, `./run.sh create`
 (if you hadn't already) and then SSH into your machine.
+
+**If you use a private IP address**, follow the instructions in
+[this article](https://medium.com/@albert.brand/remote-to-a-vm-over-an-iap-tunnel-with-vscode-f9fb54676153)
+to set up VS Code. The same method may work for IntelliJ, but is untested.
+On Windows,
+[this article](https://safwene-benaich.medium.com/developing-on-remote-vm-via-vscode-using-google-clouds-iap-6b6549f9270c)
+may be useful, but is also untested.
 
 ### :collision: Destroy the server
 
