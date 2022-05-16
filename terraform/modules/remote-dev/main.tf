@@ -67,7 +67,7 @@ resource "google_compute_firewall" "ingress" {
 
   allow {
     protocol = "tcp"
-    ports    = ["22"]
+    ports    = ["22", "80", "443"]
   }
 
   allow {
@@ -86,7 +86,7 @@ resource "google_compute_firewall" "egress" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "443"]
+    ports    = ["22", "80", "443"]
   }
 }
 

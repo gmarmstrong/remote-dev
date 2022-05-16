@@ -2,6 +2,16 @@
 set -o errexit
 set -o nounset
 
+require() {
+  if ! command -v "$1" &> /dev/null; then
+    echo "Command $1 not found. Exiting."
+    exit
+  fi
+}
+
+require gcloud
+require git
+
 if [ $# -eq 0 ]
 then
   echo "usage: $0 <command>"
@@ -13,6 +23,8 @@ then
 fi
 
 # Configuration
+export instance_zone="us-east1-b"
+export instance_name="remote-dev"
 export PROJECT_ID="gmarmstrong" # replace with your GCP project name
 export TERRAFORM_VERSION="1.1.9" # refer to https://www.terraform.io/downloads
 export TERRAFORM_VERSION_SHA256SUM="9d2d8a89f5cc8bc1c06cb6f34ce76ec4b99184b07eb776f8b39183b513d7798a"
@@ -51,18 +63,23 @@ destroy() {
   gsutil -m rm -r "gs://${PROJECT_ID}_tf-state"
 }
 
+vscode_ssh() {
+  # write keys to ~/.google_compute_known_hosts and print the equivalent ssh command
+  gcloud compute ssh "$instance_name" --zone="$instance_zone" --tunnel-through-iap --dry-run
+  echo Now run gcloud compute ssh "\$instance_name" --zone="\$instance_zone" --tunnel-through-iap
+  echo Then see "https://medium.com/@albert.brand/remote-to-a-vm-over-an-iap-tunnel-with-vscode-f9fb54676153"
+}
 
-if [ "$1" == "create" ] # launch the system
-then
+if [ "$1" == "create" ]; then # launch the system
   set_permissions
   builders_build
   packer_build
   tf_build
-elif [ "$1" == "quick" ] # launch the system, skipping some steps
-then
+elif [ "$1" == "vscode" ]; then
+  vscode_ssh # prepare for using instance as vscode backend
+elif [ "$1" == "quick" ]; then # launch the system, skipping some steps
   packer_build
   tf_build
-elif [ "$1" == "destroy" ] # shut down the system
-then
+elif [ "$1" == "destroy" ]; then # shut down the system
   destroy
 fi
